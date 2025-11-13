@@ -1,19 +1,13 @@
 const express = require("express");
 const app = express();
-console.log(app.router);
+const authorRouter = require("./routes/authorRouter");
+const bookRouter = require("./routes/bookRouter");
+const indexRouter = require("./routes/indexRouter");
 
-app.get("/", (req, res) => res.send("Hello world"));
-app.get("/:username/messages", (req, res) => {
-  console.log("router parameters", req.params);
-  console.log("query parameters", req.query);
+app.use("/authors", authorRouter);
+app.use("/books", bookRouter);
+app.use("/", indexRouter);
 
-  res.end();
-});
-
-app.get("/:username/messages/:sadam", (req, res) => {
-  console.log(req.params);
-  res.end();
-});
 const PORT = 3000;
 
 app.listen(PORT, (err) => {
