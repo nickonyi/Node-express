@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
+const authorRouter = require("./routes/authorRouter");
+const bookRouter = require("./routes/bookRouter");
+const indexRouter = require("./routes/indexRouter");
 
-app.get("/", (req, res) => res.send("Hello world"));
-app.get("/{*splat}", (req, res) => {
-  res.send(
-    "/{*splat} is a great way to catch all otherwise unmatched paths, e.g. for custom 404 error handling."
-  );
-});
+app.use("/authors", authorRouter);
+app.use("/books", bookRouter);
+app.use("/", indexRouter);
 
 app.get("/messages", (req, res) => {
   res.send(
