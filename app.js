@@ -19,6 +19,11 @@ app.use((req, res) => {
   res.send("Bye");
 });
 
+app.get("/messages", (req, res) => {
+  res.send(
+    "This route will not be reached because the previous route's path matches first"
+  );
+});
 const PORT = 3000;
 
 app.listen(PORT, (err) => {
