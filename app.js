@@ -16,7 +16,7 @@ app.get("/messages", (req, res) => {
 
 app.use((error, req, res, next) => {
   console.log(error);
-  res.status(err.statusCode || 500).send(err.message);
+  res.status(error.statusCode || 500).send(error.message);
 });
 const PORT = 3000;
 
