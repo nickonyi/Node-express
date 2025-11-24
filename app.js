@@ -8,6 +8,9 @@ app.use("/authors", authorRouter);
 app.use("/books", bookRouter);
 app.use("/", indexRouter);
 
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
 app.get("/messages", (req, res) => {
   res.send(
     "This route will not be reached because the previous route's path matches first"
