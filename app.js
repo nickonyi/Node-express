@@ -7,15 +7,13 @@ const indexRouter = require("./routes/indexRouter");
 
 app.use("/authors", authorRouter);
 app.use("/books", bookRouter);
-app.use("/", indexRouter);
+//app.use("/", indexRouter);
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.get("/messages", (req, res) => {
-  res.send(
-    "This route will not be reached because the previous route's path matches first"
-  );
+app.get("/", (req, res) => {
+  res.render("index", { message: "EJS rocks" });
 });
 
 app.use((error, req, res, next) => {
