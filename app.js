@@ -17,8 +17,9 @@ const links = [
   { href: "about", text: "About" },
 ];
 
+const users = ["Rose", "Cake", "Biff"];
 app.get("/", (req, res) => {
-  res.render("index", { links: links });
+  res.render("index", { links: links, users: users });
 });
 
 app.use((error, req, res, next) => {
