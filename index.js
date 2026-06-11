@@ -2,16 +2,14 @@ import express from "express";
 
 const app = express();
 
-app.get("/messages", (req, res) => {
-  res.send(
-    "This route will not be reached because the previous route's path matches first.",
-  );
+app.get("/:username/messages", (req, res) => {
+  console.log(req.params);
+  res.send();
 });
 
-app.get("/{*splat}", (req, res) => {
-  res.send(
-    "/{*splat} is a great way to catch all otherwise unmatched paths, e.g. for custom 404 error handling.",
-  );
+app.get("/:username/messages/:messageId", (req, res) => {
+  console.log(req.params);
+  res.send();
 });
 
 const PORT = 3000;
