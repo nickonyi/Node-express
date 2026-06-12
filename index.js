@@ -7,7 +7,7 @@ app.get("/:username/messages", (req, res) => {
   res.send();
 });
 
-app.get("/:username/messages/:messageId", (req, res) => {
+app.get("/:username/messages/:messageIdd", (req, res) => {
   console.log(req.params);
   res.send();
 });
