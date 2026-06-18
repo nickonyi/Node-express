@@ -11,4 +11,4 @@ function firstToLast(str, c) {
   return last - first;
 }
 
-console.log(firstToLast("ababc", "c"));
+console.log(firstToLast("ababgsgsfc", "c"));
