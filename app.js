@@ -5,6 +5,12 @@ import authRouter from "./routes/authorRouter.js";
 
 const app = express();
 
+app.use((req, res) => {
+  res.send("Hello");
+  console.log("will still run");
+  res.send("bye");
+});
+
 app.use("/authors", authRouter);
 app.use("/books", bookRouter);
 app.use("/", indexRouter);
