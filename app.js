@@ -5,10 +5,20 @@ import authRouter from "./routes/authorRouter.js";
 
 const app = express();
 
+const myMiddleware = (req, res, next) => {
+  console.log("Middleware function called");
+
+  req.customProperty = "Hello from my middleware";
+
+  next();
+};
+
+app.use(myMiddleware);
+
 app.use((req, res) => {
+  console.log(req.customProperty);
+
   res.send("Hello");
-  console.log("will still run");
-  res.send("bye");
 });
 
 app.use("/authors", authRouter);
