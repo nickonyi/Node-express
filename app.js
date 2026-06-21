@@ -15,12 +15,6 @@ const myMiddleware = (req, res, next) => {
 
 app.use(myMiddleware);
 
-app.use((req, res) => {
-  console.log(req.customProperty);
-
-  res.send("Hello");
-});
-
 app.use("/authors", authRouter);
 app.use("/books", bookRouter);
 app.use("/", indexRouter);
