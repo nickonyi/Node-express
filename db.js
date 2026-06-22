@@ -8,4 +8,4 @@ const getAuthorById = async (authorId) => {
   return authors.find((author) => author.id === authorId);
 };
 
-export default getAuthorById;
+export default { getAuthorById };
