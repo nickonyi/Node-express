@@ -27,7 +27,7 @@ app.use("/", indexRouter);
 app.use((err, req, res, next) => {
   //console.log(err.statusCode);
   // You will see an OH NO! in the page, with a status code of 500 that can be seen in the network tab of the dev tools
-  //res.status(err.statusCode).send(err.message);
+  res.status(err.statusCode || 500).send(err.message);
 });
 
 const PORT = 3000;
