@@ -2,8 +2,16 @@ import express from "express";
 import indexRouter from "./routes/indexRouter.js";
 import bookRouter from "./routes/bookRouter.js";
 import authRouter from "./routes/authorRouter.js";
+import url from "url";
+import path from "path";
 
 const app = express();
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 const myMiddleware = (req, res, next) => {
   console.log("Middleware function called");
