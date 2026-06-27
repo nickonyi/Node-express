@@ -21,6 +21,7 @@ const myMiddleware = (req, res, next) => {
   next();
 };
 
+app.use(express.static(path.join(__dirname, "public")));
 app.use(myMiddleware);
 
 app.use("/authors", authRouter);
