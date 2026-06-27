@@ -1,5 +1,10 @@
+<!-- index.ejs -->
 <html>
   <body>
-    <%= message%>
+    <%- include('navbar',{links:links}) %>
+    <!-- replace the below with the output of just foo -->
+    <% users.forEach((user)=>{%>
+      <%- include('users/user',{user:user})%>
+      <% })%>
   </body>
 </html>
