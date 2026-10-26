@@ -1,49 +1,54 @@
 import express from "express";
 import bodyParser from "body-parser";
+import jwt from "jsonwebtoken";
 
 const app = express();
 
-const employees = [
-  { firstName: "Jane", lastName: "Smith", age: 20 },
-  { firstName: "John", lastName: "Smith", age: 30 },
-  { firstName: "Mary", lastName: "Green", age: 25 },
-];
+const verifyToken = (req, res, next) => {
+  const bearerHeader = req.headers["authorization"];
+
+  if (typeof bearerHeader !== "undefined") {
+    const bearerToken = bearerHeader.split(" ")[1];
+    req.token = bearerToken;
+    next();
+  } else {
+    res.sendStatus(403);
+  }
+};
 
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  return res.send("Received a GET HTTP method");
+app.get("/api", (req, res) => {
+  return res.json({
+    message: "Welcome to the api",
+  });
 });
 
-app.post("/", (req, res) => {
-  return res.send("Received a POST HTTP method");
+app.post("/api/posts", verifyToken, (req, res) => {
+  jwt.verify(req.token, "secretkey", { expiresIn: "30s" }, (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      res.json({
+        message: "Post created...",
+        authData,
+      });
+    }
+  });
 });
 
-app.put("/", (req, res) => {
-  return res.send("Received a PUT HTTP method");
-});
+app.post("/api/login", (req, res) => {
+  const user = {
+    id: 1,
+    username: "nick",
+    email: "nick@gmail.com",
+  };
 
-app.delete("/", (req, res) => {
-  return res.send("Received a DELETE HTTP method");
-});
-
-app.get("/employees", (req, res) => {
-  const { firstName, lastName, age } = req.body;
-  let results = [...employees];
-
-  if (firstName) {
-    results = results.filter((r) => r.firstName === firstName);
-  }
-
-  if (lastName) {
-    results = results.filter((r) => r.lastName === lastName);
-  }
-
-  if (age) {
-    results = results.filter((r) => +r.age === +age);
-  }
-
-  res.json(results);
+  jwt.sign({ user }, "secretkey", (err, token) => {
+    res.json({
+      token,
+    });
+  });
 });
 
 const PORT = 3000;
